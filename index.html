@@ -1,9 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Celebrating African Americans in Artificial Intelligence — their achievements, innovations, and contributions to the field.">
+  <meta name="keywords" content="African Americans, AI, artificial intelligence, pioneers, pioneers in AI, Black AI researchers, algorithmic bias, machine learning">
+  <meta name="author" content="African Americans in AI">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#d4a843">
+  <meta name="color-scheme" content="dark light">
+
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="African Americans in AI — Celebrating Pioneers & Innovators">
+  <meta property="og:description" content="Celebrating the pioneers, innovators, and leaders shaping the future of artificial intelligence.">
+  <meta property="og:url" content="https://africanamericansinai.org">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://africanamericansinai.org/images/og-social-preview.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:site_name" content="African Americans in AI">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="African Americans in AI — Celebrating Pioneers & Innovators">
+  <meta name="twitter:description" content="Celebrating the pioneers, innovators, and leaders shaping the future of artificial intelligence.">
+  <meta name="twitter:image" content="https://africanamericansinai.org/images/og-social-preview.png">
+  <meta name="twitter:site" content="@AfricanAI">
+  <meta name="twitter:creator" content="@AfricanAI">
+
   <title>African Americans in AI — Celebrating Achievements</title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,17 +37,43 @@
 </head>
 <body>
 
-  <!-- ===== Header ===== -->
-  <header class="header" role="banner">
-    <div class="header__decoration header__decoration--top" aria-hidden="true"></div>
-    <div class="header__decoration header__decoration--bottom" aria-hidden="true"></div>
-    <div class="container">
-      <h1 class="header__title">African Americans in AI</h1>
-      <p class="header__subtitle">Celebrating the pioneers, innovators, and leaders shaping the future of artificial intelligence</p>
+  <!-- ===== Navigation Bar ===== -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container navbar__inner">
+      <a href="#home" class="navbar__logo" aria-label="African Americans in AI — Home">
+        <span class="navbar__logo-icon" aria-hidden="true">🧠</span>
+        <span class="navbar__logo-text">African Americans in AI</span>
+      </a>
+      <button class="navbar__toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+      <div class="navbar__menu" id="nav-menu" role="menubar">
+        <a href="#home" class="navbar__link" role="menuitem">Home</a>
+        <a href="#pioneers" class="navbar__link" role="menuitem">Pioneers</a>
+        <a href="#timeline" class="navbar__link" role="menuitem">Timeline</a>
+        <a href="#resources" class="navbar__link" role="menuitem">Resources</a>
+        <a href="#contribute" class="navbar__link" role="menuitem">Contribute</a>
+        <button class="navbar__theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle theme">
+          <span class="theme-icon-light" aria-hidden="true">☀️</span>
+          <span class="theme-icon-dark" aria-hidden="true">🌙</span>
+        </button>
+      </div>
     </div>
-  </header>
+  </nav>
 
   <main id="main-content" role="main">
+
+    <!-- ===== Hero / Header ===== -->
+    <header class="header" id="home" role="banner">
+      <div class="header__decoration header__decoration--top" aria-hidden="true"></div>
+      <div class="header__decoration header__decoration--bottom" aria-hidden="true"></div>
+      <div class="container">
+        <h1 class="header__title">African Americans in AI</h1>
+        <p class="header__subtitle">Celebrating the pioneers, innovators, and leaders shaping the future of artificial intelligence</p>
+      </div>
+    </header>
 
     <!-- ===== Spotlight Section ===== -->
     <section class="spotlight" aria-labelledby="spotlight-heading">
@@ -43,9 +94,9 @@
           <button class="btn btn--primary" id="btn-discover" aria-label="Discover a random achievement">
             <span aria-hidden="true">🎲</span> Discover Another
           </button>
-          <button class="btn btn--secondary" id="btn-view-all" aria-label="View all pioneers">
+          <a href="#pioneers" class="btn btn--secondary" id="btn-view-all" aria-label="View all pioneers">
             <span aria-hidden="true">📋</span> View All Pioneers
-          </button>
+          </a>
         </div>
       </div>
     </section>
@@ -68,6 +119,21 @@
       </div>
     </section>
 
+    <!-- ===== Search Bar ===== -->
+    <section class="search" aria-labelledby="search-heading">
+      <div class="container">
+        <div class="search__inner">
+          <h3 class="search__title" id="search-heading">🔎 Search Pioneers</h3>
+          <div class="search__input-wrapper">
+            <input type="text" class="search__input" id="search-input" placeholder="Search by name, field, organization, or achievement..." aria-label="Search pioneers">
+            <span class="search__icon" aria-hidden="true">🔍</span>
+            <button class="search__clear" id="search-clear" aria-label="Clear search" type="button">&times;</button>
+          </div>
+          <div class="search__results-count" id="search-results-count" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== Filter Section ===== -->
     <section class="filter" aria-label="Filter pioneers by category">
       <div class="container">
@@ -80,29 +146,169 @@
       </div>
     </section>
 
-    <!-- ===== Grid Section ===== -->
-    <section class="grid" aria-labelledby="grid-heading">
+    <!-- ===== View Toggle ===== -->
+    <section class="view-toggle" aria-label="View options">
+      <div class="container">
+        <div class="view-toggle__inner">
+          <span class="view-toggle__label">View:</span>
+          <div class="view-toggle__buttons" role="group" aria-label="View mode">
+            <button class="view-toggle__btn view-toggle__btn--active" id="btn-grid-view" aria-pressed="true" data-view="grid">
+              <span aria-hidden="true">▦</span> Grid
+            </button>
+            <button class="view-toggle__btn" id="btn-timeline-view" aria-pressed="false" data-view="timeline">
+              <span aria-hidden="true">⏳</span> Timeline
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Grid / Timeline Section ===== -->
+    <section class="grid" id="pioneers" aria-labelledby="grid-heading">
       <div class="container">
         <div class="section-header">
           <h2 class="section-header__title" id="grid-heading">All Pioneers</h2>
           <p class="section-header__subtitle">Explore the contributions of African American leaders in AI</p>
         </div>
-        <div class="grid__inner" id="pioneers-grid" role="list">
+
+        <!-- Skeleton Loaders -->
+        <div class="skeleton-grid" id="skeleton-grid" aria-hidden="true">
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+          <div class="skeleton-card"></div>
+        </div>
+
+        <div class="grid__inner timeline__inner" id="pioneers-grid" role="list">
           <!-- Dynamically filled by JS -->
         </div>
         <div class="empty-state" id="empty-state" style="display: none;">
           <div class="empty-state__icon" aria-hidden="true">🔍</div>
-          <p class="empty-state__text">No pioneers found in this category. Try selecting a different filter.</p>
+          <p class="empty-state__text">No pioneers found matching your search or filter. Try adjusting your criteria.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Resources & Organizations ===== -->
+    <section class="resources" id="resources" aria-labelledby="resources-heading">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-header__title" id="resources-heading">Resources & Community</h2>
+          <p class="section-header__subtitle">Organizations, fellowships, mentorship, and reading to support your AI journey</p>
+        </div>
+
+        <div class="resources__grid" id="resources-grid">
+          <!-- Dynamically filled by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contribute / Nominate Section ===== -->
+    <section class="contribute" id="contribute" aria-labelledby="contribute-heading">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-header__title" id="contribute-heading">Nominate a Pioneer</h2>
+          <p class="section-header__subtitle">Know an outstanding African American leader in AI? Help us recognize them.</p>
+        </div>
+        <div class="contribute__cta">
+          <p>Have a pioneer in mind? Submit their nomination using the form below.</p>
+          <button class="btn btn--primary" id="btn-open-nominate" aria-label="Open nomination form">
+            <span aria-hidden="true">📝</span> Submit a Nomination
+          </button>
         </div>
       </div>
     </section>
 
   </main>
 
+  <!-- ===== Nomination Modal ===== -->
+  <div class="modal" id="nominate-modal" role="dialog" aria-modal="true" aria-labelledby="nominate-modal-title" aria-hidden="true">
+    <div class="modal__overlay" id="nominate-overlay"></div>
+    <div class="modal__content" role="document">
+      <button class="modal__close" id="nominate-close" aria-label="Close nomination form">&times;</button>
+      <h2 class="modal__title" id="nominate-modal-title">Nominate a Pioneer</h2>
+      <p class="modal__subtitle">Fill in the details below to nominate an African American leader in AI.</p>
+      <form id="nominate-form" novalidate>
+        <div class="form__group">
+          <label for="nominate-name">Pioneer's Full Name <span class="required">*</span></label>
+          <input type="text" id="nominate-name" name="name" required placeholder="e.g., Dr. Jane Smith" autocomplete="name">
+          <span class="form__error" id="error-name" role="alert"></span>
+        </div>
+        <div class="form__group">
+          <label for="nominate-field">Field / Expertise <span class="required">*</span></label>
+          <input type="text" id="nominate-field" name="field" required placeholder="e.g., Machine Learning, AI Ethics">
+          <span class="form__error" id="error-field" role="alert"></span>
+        </div>
+        <div class="form__group">
+          <label for="nominate-achievement">Key Achievements <span class="required">*</span></label>
+          <textarea id="nominate-achievement" name="achievement" rows="4" required placeholder="Describe their key contributions and achievements..."></textarea>
+          <span class="form__error" id="error-achievement" role="alert"></span>
+        </div>
+        <div class="form__group">
+          <label for="nominate-links">Reference Links</label>
+          <input type="url" id="nominate-links" name="links" placeholder="https://example.com (optional)">
+          <span class="form__error" id="error-links" role="alert"></span>
+        </div>
+        <div class="form__group">
+          <label for="nominate-org">Organization / Affiliation</label>
+          <input type="text" id="nominate-org" name="org" placeholder="e.g., Stanford University">
+        </div>
+        <div class="form__group">
+          <label for="nominate-contact">Your Contact Info <span class="required">*</span></label>
+          <input type="email" id="nominate-contact" name="contact" required placeholder="your.email@example.com">
+          <span class="form__error" id="error-contact" role="alert"></span>
+        </div>
+        <div class="form__group">
+          <label for="nominate-year">Year of Impact (optional)</label>
+          <input type="text" id="nominate-year" name="year" placeholder="e.g., 2018–Present">
+        </div>
+        <div class="form__actions">
+          <button type="submit" class="btn btn--primary">Submit Nomination</button>
+          <button type="button" class="btn btn--secondary" id="nominate-cancel">Cancel</button>
+        </div>
+        <div class="form__success" id="nominate-success" style="display: none;" role="status">
+          ✅ Thank you! Your nomination has been submitted for review.
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== Profile Detail Modal ===== -->
+  <div class="modal" id="detail-modal" role="dialog" aria-modal="true" aria-labelledby="detail-modal-title" aria-hidden="true">
+    <div class="modal__overlay" id="detail-overlay"></div>
+    <div class="modal__content modal__content--detail" role="document">
+      <button class="modal__close" id="detail-close" aria-label="Close detail view">&times;</button>
+      <div id="detail-body">
+        <!-- Dynamically filled by JS -->
+      </div>
+    </div>
+  </div>
+
   <!-- ===== Footer ===== -->
   <footer class="footer" role="contentinfo">
     <div class="container">
-      <p class="footer__text">Built with ❤️ to celebrate and amplify the contributions of African Americans in AI. <a href="#main-content">Back to top ↑</a></p>
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <span class="footer__logo-icon" aria-hidden="true">🧠</span>
+          <span class="footer__logo-text">African Americans in AI</span>
+        </div>
+        <nav class="footer__nav" aria-label="Footer navigation">
+          <a href="#home" class="footer__link">Home</a>
+          <a href="#pioneers" class="footer__link">Pioneers</a>
+          <a href="#timeline" class="footer__link">Timeline</a>
+          <a href="#resources" class="footer__link">Resources</a>
+          <a href="#contribute" class="footer__link">Contribute</a>
+        </nav>
+        <div class="footer__social">
+          <a href="https://github.com" class="footer__social-link" aria-label="Visit our GitHub repository" target="_blank" rel="noopener noreferrer">
+            <span aria-hidden="true">🐙</span> GitHub
+          </a>
+        </div>
+        <p class="footer__copyright">© 2026 African Americans in AI. Built with ❤️ to celebrate and amplify contributions.</p>
+        <a href="#home" class="footer__back-to-top" id="back-to-top" aria-label="Back to top">↑ Back to Top</a>
+      </div>
     </div>
   </footer>
 
