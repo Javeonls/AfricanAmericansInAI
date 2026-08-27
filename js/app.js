@@ -852,7 +852,172 @@
         closeNav();
       }
     });
+
   }
+
+  // ===== New Functions for Data & Insights and Accessibility Tool =====
+  // Initialize Chart.js for data visualization
+  function initDataVisualization() {
+    const ctx = document.getElementById('diversity-chart').getContext('2d');
+    if (ctx) {
+      const data = {
+        labels: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
+        datasets: [
+          {
+            label: 'African American Representation in AI Jobs (%)',
+            data: [5, 6, 7, 8, 9, 10, 11, 12, 13],
+            backgroundColor: 'rgba(255, 99, 132, 0.7)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1,
+            tension: 0.4,
+          },
+          {
+            label: 'Overall AI Jobs (%)',
+            data: [10, 11, 12, 13, 14, 15, 16, 17, 18],
+            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+            tension: 0.4,
+          }
+        ],
+      };
+      const options = {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.dataset.label || '' + ': ' + context.raw + '%';
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Percentage (%)'
+            }
+          }
+        }
+      };
+      new Chart(ctx, {
+        type: 'line',
+        data: data,
+        options: options
+      });
+    }
+  }
+
+  // Initialize Contrast Checker
+  function initContrastChecker() {
+    const bgColorInput = document.getElementById('bg-color');
+    const textColorInput = document.getElementById('text-color');
+    const checkContrastBtn = document.getElementById('check-contrast-btn');
+    const contrastResultDiv = document.getElementById('contrast-result');
+    
+    // Load saved color values from localStorage
+    const savedBgColor = localStorage.getItem('bg-color') || '#ffffff';
+    const savedTextColor = localStorage.getItem('text-color') || '#000000';
+    
+    bgColorInput.value = savedBgColor;
+    textColorInput.value = savedTextColor;
+    
+    // Check contrast when button is clicked
+    checkContrastBtn.addEventListener('click', async function() {
+      const bgColor = bgColorInput.value;
+      const textColor = textColorInput.value;
+      
+      // Save colors to localStorage
+      localStorage.setItem('bg-color', bgColor);
+      localStorage.setItem('text-color', textColor);
+      
+      // Display loading state
+      contrastResultDiv.innerHTML = '<p>Checking contrast...</p>';
+      contrastResultDiv.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+      
+      try {
+        // Call Flask backend to check contrast
+        const response = await fetch('http://localhost:5000/check_contrast', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            bg_color: bgColor,
+            text_color: textColor
+          })
+        });
+        
+        const data = await response.json();
+        
+        // Display result
+        contrastResultDiv.innerHTML = '';
+        contrastResultDiv.className = 'contrast-result';
+        
+        if (data.is_accessible) {
+          contrastResultDiv.innerHTML = `<p>✅ Good contrast! This combination is accessible.</p>`;
+          contrastResultDiv.style.backgroundColor = 'rgba(128, 208, 128, 0.2)';
+        } else {
+          contrastResultDiv.innerHTML = `<p>❌ Low contrast! This combination is not accessible.</p>`;
+          contrastResultDiv.style.backgroundColor = 'rgba(255, 128, 128, 0.2)';
+          if (data.suggested_fix) {
+            contrastResultDiv.innerHTML += `<p>${data.suggested_fix}</p>`;
+          }
+        }
+      } catch (error) {
+        contrastResultDiv.innerHTML = `<p>⚠️ Error checking contrast: ${error.message}</p>`;
+        contrastResultDiv.style.backgroundColor = 'rgba(255, 165, 0, 0.2)';
+      }
+    });
+  }
+
+  // Simulate contrast ratio calculation (for demo purposes)
+  function calculateContrastRatio(bgColor, textColor) {
+    // Convert hex to RGB
+    const bgRgb = hexToRgb(bgColor);
+    const textRgb = hexToRgb(textColor);
+    
+    // Calculate relative luminance
+    const bgLuminance = getLuminance(bgRgb);
+    const textLuminance = getLuminance(textRgb);
+    
+    // Calculate contrast ratio
+    const lighter = Math.max(bgLuminance, textLuminance);
+    const darker = Math.min(bgLuminance, textLuminance);
+    return (lighter + 0.05) / (darker + 0.05);
+  }
+
+  // Helper function to convert hex to RGB
+  function hexToRgb(hex) {
+    const result = /^#?([a-fd]{6}|[a-fd]{3})$/i.exec(hex);
+    if (!result) return { r: 0, g: 0, b: 0 };
+    
+    const hexColor = result[1];
+    const bigint = parseInt(hexColor, 16);
+    const r = ((bigint >> 16) & 255) / 255;
+    const g = ((bigint >> 8) & 255) / 255;
+    const b = (bigint & 255) / 255;
+    
+    return { r: r, g: g, b: b };
+  }
+
+  // Helper function to calculate relative luminance
+  function getLuminance(rgb) {
+    const { r, g, b } = rgb;
+    const a = [r, g, b].map(v => {
+      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+    });
+    return 0.2126 * a[0] + 0.7152 * a[1] + 0.0722 * a[2];
+  }
+
+  // Initialize all new features
+  initDataVisualization();
+  initContrastChecker();
 
   // Start the app when DOM is ready
   if (document.readyState === 'loading') {

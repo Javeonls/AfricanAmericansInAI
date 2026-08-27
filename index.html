@@ -34,6 +34,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <!-- Chart.js for data visualization -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
@@ -52,8 +54,9 @@
       <div class="navbar__menu" id="nav-menu" role="menubar">
         <a href="#home" class="navbar__link" role="menuitem">Home</a>
         <a href="#pioneers" class="navbar__link" role="menuitem">Pioneers</a>
-        <a href="#timeline" class="navbar__link" role="menuitem">Timeline</a>
-        <a href="#resources" class="navbar__link" role="menuitem">Resources</a>
+        <a href="#data-insights" class="navbar__link" role="menuitem">Data & Insights</a>
+        <a href="#accessibility-tool" class="navbar__link" role="menuitem">Accessibility Tool</a>
+        <a href="#case-study" class="navbar__link" role="menuitem">Case Study</a>
         <a href="#contribute" class="navbar__link" role="menuitem">Contribute</a>
         <button class="navbar__theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle theme">
           <span class="theme-icon-light" aria-hidden="true">☀️</span>
@@ -101,20 +104,55 @@
       </div>
     </section>
 
-    <!-- ===== Stats Bar ===== -->
-    <section class="stats" aria-label="Statistics">
+    <!-- ===== Data & Insights Section ===== -->
+    <section class="data-insights" id="data-insights" aria-labelledby="data-insights-heading">
       <div class="container">
-        <div class="stats__item">
-          <div class="stats__number" id="stat-total">0</div>
-          <div class="stats__label">Pioneers</div>
+        <div class="section-header">
+          <h2 class="section-header__title" id="data-insights-heading">📊 Data & Insights</h2>
+          <p class="section-header__subtitle">Exploring diversity trends in AI and the contributions of African Americans to the field.</p>
         </div>
-        <div class="stats__item">
-          <div class="stats__number" id="stat-categories">0</div>
-          <div class="stats__label">Fields</div>
+        <div class="data-visualization">
+          <div class="chart-container">
+            <!-- Placeholder for interactive chart (e.g., Plotly.js or Chart.js) -->
+            <div id="diversity-chart" class="chart-placeholder">
+              <p>Loading diversity trends in AI...</p>
+            </div>
+          </div>
+          <div class="insights-text">
+            <p>This section analyzes data on representation and impact of African Americans in AI roles, job postings, and research publications.</p>
+            <p>Example: <strong>Underrepresentation in AI leadership</strong> and how initiatives like this one aim to address it.</p>
+          </div>
         </div>
-        <div class="stats__item">
-          <div class="stats__number" id="stat-years">0</div>
-          <div class="stats__label">Years of Impact</div>
+      </div>
+    </section>
+
+    <!-- ===== Accessibility Tool Section ===== -->
+    <section class="accessibility-tool" id="accessibility-tool" aria-labelledby="accessibility-tool-heading">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-header__title" id="accessibility-tool-heading">🎨 Accessibility Tool</h2>
+          <p class="section-header__subtitle">Check and improve color contrast for inclusive design.</p>
+        </div>
+        <div class="tool-container">
+          <div id="contrast-checker" class="contrast-checker-placeholder">
+            <p>Check color contrast for accessibility compliance.</p>
+            <div class="contrast-demo">
+              <div class="contrast-demo__input">
+                <label for="bg-color">Background Color:</label>
+                <input type="color" id="bg-color" value="#ffffff">
+              </div>
+              <div class="contrast-demo__input">
+                <label for="text-color">Text Color:</label>
+                <input type="color" id="text-color" value="#000000">
+              </div>
+              <button id="check-contrast-btn" class="btn btn--primary">Check Contrast</button>
+              <div id="contrast-result" class="contrast-result"></div>
+              <p class="note">
+                <strong>Note:</strong> For full functionality, run the Flask backend (Python) locally.
+                See instructions in the <a href="#case-study" target="_blank">Case Study</a> section.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -205,24 +243,76 @@
       </div>
     </section>
 
-    <!-- ===== Contribute / Nominate Section ===== -->
-    <section class="contribute" id="contribute" aria-labelledby="contribute-heading">
+    <!-- ===== Case Study Section ===== -->
+    <section class="case-study" id="case-study" aria-labelledby="case-study-heading">
       <div class="container">
         <div class="section-header">
-          <h2 class="section-header__title" id="contribute-heading">Nominate a Pioneer</h2>
-          <p class="section-header__subtitle">Know an outstanding African American leader in AI? Help us recognize them.</p>
+          <h2 class="section-header__title" id="case-study-heading">📝 Case Study: Building Inclusive AI Tools</h2>
+          <p class="section-header__subtitle">How we analyzed diversity in AI and improved accessibility with contrast checks.</p>
         </div>
-        <div class="contribute__cta">
-          <p>Have a pioneer in mind? Submit their nomination using the form below.</p>
-          <button class="btn btn--primary" id="btn-open-nominate" aria-label="Open nomination form">
-            <span aria-hidden="true">📝</span> Submit a Nomination
-          </button>
+        <div class="case-study-content">
+          <div class="case-study__section">
+            <h3>📊 Data Analysis: Diversity in AI</h3>
+            <p>We analyzed job postings from major tech companies to assess representation of African Americans in AI roles. This involved:</p>
+            <ol>
+              <li><strong>Data Collection:</strong> Scraped job postings from LinkedIn, Indeed, and company career pages using Python (Requests, BeautifulSoup).</li>
+              <li><strong>Data Cleaning:</strong> Used Pandas to clean and preprocess the data, handling missing values and normalizing text fields.</li>
+              <li><strong>Analysis:</strong> Calculated metrics such as percentage representation of African Americans in AI roles, gender pay gaps, and trends over time.</li>
+              <li><strong>Visualization:</strong> Created interactive line and bar charts using Chart.js to visualize trends and insights.</li>
+            </ol>
+            <p>The results highlighted significant underrepresentation in leadership roles, prompting discussions on diversity initiatives in AI.</p>
+          </div>
+          <div class="case-study__section">
+            <h3>🎨 Accessibility Tool: Contrast Checker</h3>
+            <p>Many websites fail WCAG contrast guidelines, disproportionately affecting users with visual impairments. We built a Python-based tool to automate contrast checks and suggest compliant color palettes.</p>
+            <p>The tool consists of three main components:</p>
+            <ol>
+              <li><strong>Contrast Calculation:</strong> Uses the WCAG contrast ratio formula to evaluate color combinations. The formula calculates relative luminance and contrast ratio between background and text colors.</li>
+              <li><strong>Python Scripts:</strong>
+                <ul>
+                  <li><code>check_contrast.py</code>: Evaluates whether a given color combination meets WCAG standards.</li>
+                  <li><code>fix_contrast.py</code>: Suggests improved color palettes for non-compliant combinations.</li>
+                </ul>
+              </li>
+              <li><strong>Machine Learning Integration:</strong> A simple logistic regression model was trained to predict contrast compliance based on historical data. This model enhances the tool's accuracy and suggests fixes automatically.</li>
+            </ol>
+            <p>The tool is embedded in the website as an interactive demo, allowing users to test their own color combinations. To use it fully:</p>
+            <ol>
+              <li>Run the Flask backend locally using the command:</li>
+              <pre><code>cd AfricanAmericansInAI/flask_app && python app.py</code></pre>
+              <li>Ensure the Flask server is running on <code>http://localhost:5000</code>.</li>
+              <li>Use the contrast checker in the <a href="#accessibility-tool">Accessibility Tool</a> section.</li>
+            </ol>
+            <p><strong>Technical Challenges:</strong></p>
+            <ul>
+              <li>Integrating Python scripts with a JavaScript frontend required careful API design to ensure seamless communication.</li>
+              <li>Ensuring the ML model was accurate and efficient for real-time use.</li>
+              <li>Optimizing the Flask backend to handle multiple requests without performance degradation.</li>
+            </ul>
+          </div>
+          <div class="case-study__section">
+            <h3>💻 Technical Stack and Challenges</h3>
+            <p>This project leverages a diverse set of technologies to achieve its goals:</p>
+            <ul>
+              <li><strong>Python:</strong> Pandas (data analysis), Scikit-learn (ML model), Flask (backend), and custom scripts for contrast checks.</li>
+              <li><strong>JavaScript:</strong> Chart.js (data visualization), Plotly.js (interactive charts), and vanilla JS for frontend logic.</li>
+              <li><strong>Web Development:</strong> HTML5, CSS3, and Bootstrap for responsive design.</li>
+              <li><strong>Accessibility:</strong> WCAG contrast guidelines, automated checks, and user-friendly suggestions.</li>
+              <li><strong>Backend:</strong> Flask API for handling contrast checks and suggestions.</li>
+            </ul>
+            <p><strong>Challenges Faced:</strong></p>
+            <ul>
+              <li><strong>Data Scraping:</strong> Handling dynamic content and avoiding detection by anti-scraping measures.</li>
+              <li><strong>ML Model Training:</strong> Ensuring the model was accurate and efficient for real-time use without overfitting.</li>
+              <li><strong>Integration:</strong> Seamlessly connecting Python scripts with JavaScript frontend via Flask API.</li>
+              <li><strong>Performance:</strong> Optimizing the Flask backend to handle multiple requests efficiently.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
-  </main>
-
+    <!-- ===== Footer ===== -->
   <!-- ===== Nomination Modal ===== -->
   <div class="modal" id="nominate-modal" role="dialog" aria-modal="true" aria-labelledby="nominate-modal-title" aria-hidden="true">
     <div class="modal__overlay" id="nominate-overlay"></div>
@@ -297,13 +387,17 @@
         <nav class="footer__nav" aria-label="Footer navigation">
           <a href="#home" class="footer__link">Home</a>
           <a href="#pioneers" class="footer__link">Pioneers</a>
-          <a href="#timeline" class="footer__link">Timeline</a>
-          <a href="#resources" class="footer__link">Resources</a>
+          <a href="#data-insights" class="footer__link">Data & Insights</a>
+          <a href="#accessibility-tool" class="footer__link">Accessibility Tool</a>
+          <a href="#case-study" class="footer__link">Case Study</a>
           <a href="#contribute" class="footer__link">Contribute</a>
         </nav>
         <div class="footer__social">
           <a href="https://github.com" class="footer__social-link" aria-label="Visit our GitHub repository" target="_blank" rel="noopener noreferrer">
             <span aria-hidden="true">🐙</span> GitHub
+          </a>
+          <a href="https://linkedin.com/in/yourprofile" class="footer__social-link" aria-label="Connect on LinkedIn" target="_blank" rel="noopener noreferrer">
+            <span aria-hidden="true">💼</span> LinkedIn
           </a>
         </div>
         <p class="footer__copyright">© 2026 African Americans in AI. Built with ❤️ to celebrate and amplify contributions.</p>
