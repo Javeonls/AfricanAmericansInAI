@@ -219,14 +219,25 @@
       '</div>' +
       '<span class="card__category" style="background-color: ' + pioneer.color + ';">' + escapeHTML(pioneer.category) + '</span>' +
       '<p class="card__achievement">' + escapeHTML(pioneer.achievement) + '</p>' +
-      '<div class="card__footer">' +
-        '<span class="card__org">📍 ' + escapeHTML(pioneer.organization) + '</span>' +
-        '<span class="card__year">' + escapeHTML(pioneer.year) + '</span>' +
-      '</div>';
+      '<div class="card__footer">
+        '<span class="card__org">📍 ' + escapeHTML(pioneer.organization) + '</span>
+        '<span class="card__year">' + escapeHTML(pioneer.year) + '</span>
+      '</div>' +
+      (pioneer.source ? '<div class="card__source">🔗 <a href="#" class="source-link" target="_blank" rel="noopener noreferrer">Source</a></div>' : '');
 
     // Click handler for detail modal
-    card.addEventListener('click', function () {
-      openDetailModal(pioneer);
+    card.addEventListener('click', function (e) {
+      if (e.target.closest('.source-link')) {
+        e.preventDefault();
+        e.stopPropagation();
+        const sourceLink = document.createElement('a');
+        sourceLink.href = pioneer.source;
+        sourceLink.target = '_blank';
+        sourceLink.rel = 'noopener noreferrer';
+        sourceLink.click();
+      } else {
+        openDetailModal(pioneer);
+      }
     });
 
     // Keyboard accessibility
@@ -795,6 +806,12 @@
       updateStats();
       handleDiscover();
       renderResources();
+      
+      // Initialize data visualization charts
+      initDataVisualization();
+      initCompanyBreakdownChart();
+      initPayEquityChart();
+      initGeographicDistributionChart();
     }, 600);
 
     // Event listeners
@@ -858,162 +875,64 @@
   // ===== New Functions for Data & Insights and Accessibility Tool =====
   // Initialize Chart.js for data visualization
   function initDataVisualization() {
-    const ctx = document.getElementById('diversity-chart').getContext('2d');
-    if (ctx) {
-      const data = {
-        labels: ['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
-        datasets: [
-          {
-            label: 'African American Representation in AI Jobs (%)',
-            data: [5, 6, 7, 8, 9, 10, 11, 12, 13],
-            backgroundColor: 'rgba(255, 99, 132, 0.7)',
-            borderColor: 'rgba(255, 99, 132, 1)',
-            borderWidth: 1,
-            tension: 0.4,
+    // Load data from JSON file
+    fetch('/data/ai_diversity_data.json')
+      .then(response => response.json())
+      .then(data => {
+        // Chart 1: Representation Over Time
+        const ctx = document.getElementById('diversity-chart').getContext('2d');
+      
+        const representationData = data.representationOverTime;
+      
+        const options = {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return `${context.dataset.label}: ${context.raw}%`;
+                }
+              }
+            },
+            datalabels: {
+              anchor: 'end',
+              align: 'top',
+              formatter: (value) => `${value}%`
+            }
           },
-          {
-            label: 'Overall AI Jobs (%)',
-            data: [10, 11, 12, 13, 14, 15, 16, 17, 18],
-            backgroundColor: 'rgba(54, 162, 235, 0.7)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1,
-            tension: 0.4,
-          }
-        ],
-      };
-      const options = {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top',
-          },
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                return context.dataset.label || '' + ': ' + context.raw + '%';
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Representation (%)'
               }
             }
           }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Percentage (%)'
-            }
-          }
+        };
+      
+        new Chart(ctx, {
+          type: 'line',
+          data: representationData,
+          options: options
+        });
+      
+        // Add source citation
+        const chartNote = document.querySelector('#diversity-chart + .chart-note');
+        if (chartNote) {
+          chartNote.innerHTML = '<p class="chart-note">Sources: ' +
+            representationData.sources.join(', ') + '</p>';
         }
-      };
-      new Chart(ctx, {
-        type: 'line',
-        data: data,
-        options: options
-      });
-    }
+      })
+      .catch(error => console.error('Error loading data:', error));
+  }
   }
 
   // Initialize Contrast Checker
-  function initContrastChecker() {
-    const bgColorInput = document.getElementById('bg-color');
-    const textColorInput = document.getElementById('text-color');
-    const checkContrastBtn = document.getElementById('check-contrast-btn');
-    const contrastResultDiv = document.getElementById('contrast-result');
-    
-    // Load saved color values from localStorage
-    const savedBgColor = localStorage.getItem('bg-color') || '#ffffff';
-    const savedTextColor = localStorage.getItem('text-color') || '#000000';
-    
-    bgColorInput.value = savedBgColor;
-    textColorInput.value = savedTextColor;
-    
-    // Check contrast when button is clicked
-    checkContrastBtn.addEventListener('click', async function() {
-      const bgColor = bgColorInput.value;
-      const textColor = textColorInput.value;
-      
-      // Save colors to localStorage
-      localStorage.setItem('bg-color', bgColor);
-      localStorage.setItem('text-color', textColor);
-      
-      // Display loading state
-      contrastResultDiv.innerHTML = '<p>Checking contrast...</p>';
-      contrastResultDiv.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
-      
-      try {
-        // Call Flask backend to check contrast
-        const response = await fetch('http://localhost:5000/check_contrast', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            bg_color: bgColor,
-            text_color: textColor
-          })
-        });
-        
-        const data = await response.json();
-        
-        // Display result
-        contrastResultDiv.innerHTML = '';
-        contrastResultDiv.className = 'contrast-result';
-        
-        if (data.is_accessible) {
-          contrastResultDiv.innerHTML = `<p>✅ Good contrast! This combination is accessible.</p>`;
-          contrastResultDiv.style.backgroundColor = 'rgba(128, 208, 128, 0.2)';
-        } else {
-          contrastResultDiv.innerHTML = `<p>❌ Low contrast! This combination is not accessible.</p>`;
-          contrastResultDiv.style.backgroundColor = 'rgba(255, 128, 128, 0.2)';
-          if (data.suggested_fix) {
-            contrastResultDiv.innerHTML += `<p>${data.suggested_fix}</p>`;
-          }
-        }
-      } catch (error) {
-        contrastResultDiv.innerHTML = `<p>⚠️ Error checking contrast: ${error.message}</p>`;
-        contrastResultDiv.style.backgroundColor = 'rgba(255, 165, 0, 0.2)';
-      }
-    });
-  }
 
-  // Simulate contrast ratio calculation (for demo purposes)
-  function calculateContrastRatio(bgColor, textColor) {
-    // Convert hex to RGB
-    const bgRgb = hexToRgb(bgColor);
-    const textRgb = hexToRgb(textColor);
-    
-    // Calculate relative luminance
-    const bgLuminance = getLuminance(bgRgb);
-    const textLuminance = getLuminance(textRgb);
-    
-    // Calculate contrast ratio
-    const lighter = Math.max(bgLuminance, textLuminance);
-    const darker = Math.min(bgLuminance, textLuminance);
-    return (lighter + 0.05) / (darker + 0.05);
-  }
-
-  // Helper function to convert hex to RGB
-  function hexToRgb(hex) {
-    const result = /^#?([a-fd]{6}|[a-fd]{3})$/i.exec(hex);
-    if (!result) return { r: 0, g: 0, b: 0 };
-    
-    const hexColor = result[1];
-    const bigint = parseInt(hexColor, 16);
-    const r = ((bigint >> 16) & 255) / 255;
-    const g = ((bigint >> 8) & 255) / 255;
-    const b = (bigint & 255) / 255;
-    
-    return { r: r, g: g, b: b };
-  }
-
-  // Helper function to calculate relative luminance
-  function getLuminance(rgb) {
-    const { r, g, b } = rgb;
-    const a = [r, g, b].map(v => {
-      return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
-    });
-    return 0.2126 * a[0] + 0.7152 * a[1] + 0.0722 * a[2];
-  }
 
   // Initialize all new features
   initDataVisualization();
@@ -1024,186 +943,168 @@
 
   // ===== New Functions for Data Visualizations =====
   function initCompanyBreakdownChart() {
-    const ctx = document.getElementById('company-breakdown').getContext('2d');
-    if (ctx) {
-      const data = {
-        labels: ['Google', 'Microsoft', 'IBM', 'Amazon', 'Apple', 'Meta', 'Other'],
-        datasets: [
-          {
-            label: 'African American Representation (%)',
-            data: [8, 6, 12, 5, 7, 4, 10],
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.7)',
-              'rgba(54, 162, 235, 0.7)',
-              'rgba(255, 206, 86, 0.7)',
-              'rgba(75, 192, 192, 0.7)',
-              'rgba(153, 102, 255, 0.7)',
-              'rgba(255, 159, 64, 0.7)',
-              'rgba(199, 199, 199, 0.7)'
-            ],
-            borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)',
-              'rgba(199, 199, 199, 1)'
-            ],
-            borderWidth: 1
-          }
-        ],
-      };
-      const options = {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top',
+    // Load data from JSON file
+    fetch('/data/ai_diversity_data.json')
+      .then(response => response.json())
+      .then(data => {
+        const ctx = document.getElementById('company-breakdown').getContext('2d');
+        const companyData = data.companyBreakdown;
+      
+        const options = {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return `${context.label}: ${context.raw}%`;
+                }
+              }
+            },
+            datalabels: {
+              anchor: 'end',
+              align: 'top',
+              formatter: (value) => `${value}%`
+            }
           },
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                return context.dataset.label + ': ' + context.raw + '%';
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Representation (%)'
               }
             }
           }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Percentage (%)'
-            }
-          }
+        };
+      
+        new Chart(ctx, {
+          type: 'bar',
+          data: companyData,
+          options: options
+        });
+      
+        // Add source citation
+        const insightNote = document.querySelector('#company-breakdown + .insight-note');
+        if (insightNote) {
+          insightNote.innerHTML = '<p class="insight-note">Sources: ' +
+            companyData.sources.join(', ') + '</p>';
         }
-      };
-      new Chart(ctx, {
-        type: 'bar',
-        data: data,
-        options: options
-      });
-    }
+      })
+      .catch(error => console.error('Error loading data:', error));
+  }
   }
 
   function initPayEquityChart() {
-    const ctx = document.getElementById('pay-equity').getContext('2d');
-    if (ctx) {
-      const data = {
-        labels: ['African American Men', 'African American Women', 'White Men', 'White Women'], 
-        datasets: [
-          {
-            label: 'Average Salary ($)',
-            data: [95000, 88000, 110000, 102000],
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.7)',
-              'rgba(54, 162, 235, 0.7)',
-              'rgba(255, 206, 86, 0.7)',
-              'rgba(75, 192, 192, 0.7)'
-            ],
-            borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)'
-            ],
-            borderWidth: 1
-          }
-        ],
-      };
-      const options = {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top',
+    // Load data from JSON file
+    fetch('/data/ai_diversity_data.json')
+      .then(response => response.json())
+      .then(data => {
+        const ctx = document.getElementById('pay-equity').getContext('2d');
+        const payEquityData = data.payEquity;
+      
+        const options = {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return `$${context.raw.toLocaleString()}`;
+                }
+              }
+            },
+            datalabels: {
+              anchor: 'end',
+              align: 'top',
+              formatter: (value) => `$${value.toLocaleString()}`
+            }
           },
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                return context.dataset.label + ': $' + context.raw;
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Average Salary ($)'
               }
             }
           }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Salary ($)'
-            }
-          }
+        };
+      
+        new Chart(ctx, {
+          type: 'bar',
+          data: payEquityData,
+          options: options
+        });
+      
+        // Add source citation
+        const insightNote = document.querySelector('#pay-equity + .insight-note');
+        if (insightNote) {
+          insightNote.innerHTML = '<p class="insight-note">Sources: ' +
+            payEquityData.sources.join(', ') + '</p>';
         }
-      };
-      new Chart(ctx, {
-        type: 'bar',
-        data: data,
-        options: options
-      });
-    }
+      })
+      .catch(error => console.error('Error loading data:', error));
+  }
   }
 
   function initGeographicDistributionChart() {
-    const ctx = document.getElementById('geographic-distribution').getContext('2d');
-    if (ctx) {
-      const data = {
-        labels: ['California', 'New York', 'Texas', 'Illinois', 'Massachusetts', 'Georgia', 'Other'],
-        datasets: [
-          {
-            label: 'African American AI Professionals (%)',
-            data: [22, 18, 12, 10, 8, 7, 23],
-            backgroundColor: [
-              'rgba(255, 99, 132, 0.7)',
-              'rgba(54, 162, 235, 0.7)',
-              'rgba(255, 206, 86, 0.7)',
-              'rgba(75, 192, 192, 0.7)',
-              'rgba(153, 102, 255, 0.7)',
-              'rgba(255, 159, 64, 0.7)',
-              'rgba(199, 199, 199, 0.7)'
-            ],
-            borderColor: [
-              'rgba(255, 99, 132, 1)',
-              'rgba(54, 162, 235, 1)',
-              'rgba(255, 206, 86, 1)',
-              'rgba(75, 192, 192, 1)',
-              'rgba(153, 102, 255, 1)',
-              'rgba(255, 159, 64, 1)',
-              'rgba(199, 199, 199, 1)'
-            ],
-            borderWidth: 1
-          }
-        ],
-      };
-      const options = {
-        responsive: true,
-        plugins: {
-          legend: {
-            position: 'top',
+    // Load data from JSON file
+    fetch('/data/ai_diversity_data.json')
+      .then(response => response.json())
+      .then(data => {
+        const ctx = document.getElementById('geographic-distribution').getContext('2d');
+        const geoData = data.geographicDistribution;
+      
+        const options = {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return `${context.label}: ${context.raw}%`;
+                }
+              }
+            },
+            datalabels: {
+              anchor: 'end',
+              align: 'top',
+              formatter: (value) => `${value}%`
+            }
           },
-          tooltip: {
-            callbacks: {
-              label: function(context) {
-                return context.dataset.label + ': ' + context.raw + '%';
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Number of Professionals'
               }
             }
           }
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Percentage (%)'
-            }
-          }
+        };
+      
+        new Chart(ctx, {
+          type: 'bar',
+          data: geoData,
+          options: options
+        });
+      
+        // Add source citation
+        const insightNote = document.querySelector('#geographic-distribution + .insight-note');
+        if (insightNote) {
+          insightNote.innerHTML = '<p class="insight-note">Sources: ' +
+            geoData.sources.join(', ') + '</p>';
         }
-      };
-      new Chart(ctx, {
-        type: 'doughnut',
-        data: data,
-        options: options
-      });
-    }
+      })
+      .catch(error => console.error('Error loading data:', error));
+  }
   }
 
   // Start the app when DOM is ready

@@ -998,7 +998,173 @@ const pioneers = [
     category: "AI Ethics & Governance",
     year: "2016–Present",
     color: "#0984E3"
+  },
+  {
+    id: 101,
+    name: "Katherine Johnson",
+    role: "Mathematician & Space Scientist",
+    organization: "NASA",
+    achievement: "Calculated trajectories for NASA's early space missions, including the Mercury and Apollo programs. Her work was critical to the success of the first American in space and the moon landing.",
+    category: "Foundational Computing",
+    year: "1953–Present",
+    color: "#E17055",
+    source: "<a href='https://www.nasa.gov/feature/langley/katherine-johnson' target='_blank'>NASA History Office</a>"
+  },
+  {
+    id: 102,
+    name: "Dorothy Vaughan",
+    role: "Mathematician & Supervisor",
+    organization: "NASA (formerly NACA)",
+    achievement: "First African American supervisor at NASA's Langley Research Center. Self-taught FORTRAN programmer who led a team of women mathematicians during the early space program.",
+    category: "Foundational Computing",
+    year: "1943–1971",
+    color: "#00B894",
+    source: "<a href='https://www.nasa.gov/feature/langley/dorothy-vaughan' target='_blank'>NASA History Office</a>"
+  },
+  {
+    id: 103,
+    name: "Mary Jackson",
+    role: "Engineer",
+    organization: "NASA",
+    achievement: "NASA's first Black female engineer. Worked on the Supersonic Pressure Tunnel and later became an engineer in the Wind Tunnel Division.",
+    category: "Foundational Computing",
+    year: "1951–1985",
+    color: "#6C5CE7",
+    source: "<a href='https://www.nasa.gov/feature/langley/mary-jackson' target='_blank'>NASA History Office</a>"
+  },
+  {
+    id: 104,
+    name: "Annie Easley",
+    role: "Computer Scientist",
+    organization: "NASA",
+    achievement: "Programmed early computer systems for NASA's Center for Computer Operations. Her work on Centaur rocket software was foundational to space exploration.",
+    category: "Foundational Computing",
+    year: "1955–1989",
+    color: "#E17055",
+    source: "<a href='https://www.nasa.gov/feature/langley/annie-easley' target='_blank'>NASA History Office</a>"
+  },
+  {
+    id: 105,
+    name: "Gladys West",
+    role: "Mathematician",
+    organization: "NASA",
+    achievement: "Mathematician whose calculations were essential to the development of satellite geodesy, which became the foundation for GPS technology.",
+    category: "Foundational Computing",
+    year: "1956–1988",
+    color: "#00B894",
+    source: "<a href='https://www.nasa.gov/feature/langley/gladys-west' target='_blank'>NASA History Office</a>"
+  },
+  {
+    id: 106,
+    name: "Evelyn Boyd Granville",
+    role: "Mathematician",
+    organization: "NASA",
+    achievement: "One of the first African American women to earn a PhD in mathematics. Her work on Apollo-era orbit computations was critical to space missions.",
+    category: "Foundational Computing",
+    year: "1956–1974",
+    color: "#6C5CE7",
+    source: "<a href='https://www.nasa.gov/feature/langley/evelyn-boyd-granville' target='_blank'>NASA History Office</a>"
+  },
+  {
+    id: 107,
+    name: "David Blackwell",
+    role: "Mathematician",
+    organization: "University of California, Berkeley",
+    achievement: "Pioneer in game theory, statistics, and dynamic programming. First African American inducted into the National Academy of Sciences.",
+    category: "Foundational Computing",
+    year: "1941–2002",
+    color: "#E17055",
+    source: "<a href='https://www.ams.org/journals/bull/2002-39-04/S0273-0979-02-00953-6/' target='_blank'>American Mathematical Society</a>"
+  },
+  {
+    id: 108,
+    name: "Clarence "Skip" Ellis",
+    role: "Computer Scientist",
+    organization: "Xerox PARC",
+    achievement: "First African American to earn a PhD in computer science (1969). Pioneer in groupware and collaborative computing systems.",
+    category: "Foundational Computing",
+    year: "1969–Present",
+    color: "#00B894",
+    source: "<a href='https://www.acm.org/publications/classics/ellis' target='_blank'>ACM</a>"
+  },
+  {
+    id: 109,
+    name: "Mark Dean",
+    role: "Computer Engineer",
+    organization: "IBM",
+    achievement: "IBM Fellow and inventor with 30+ patents, including core technologies behind the IBM PC, ISA bus, and color PC monitor.",
+    category: "Foundational Computing",
+    year: "1980–Present",
+    color: "#6C5CE7",
+    source: "<a href='https://www.ibm.com/ibm/history/ibm100/us/en/icons/dean/' target='_blank'>IBM</a>"
+  },
+  {
+    id: 110,
+    name: "Roy L. Clay Sr.",
+    role: "Entrepreneur",
+    organization: "Hewlett-Packard",
+    achievement: "Built HP's first computer division, pioneering the development of early computer systems and peripherals.",
+    category: "Foundational Computing",
+    year: "1960s–1980s",
+    color: "#E17055",
+    source: "<a href='https://www.hp.com/us-en/history/people/roy-l-clay-sr' target='_blank'>HP History</a>"
+  },
+  {
+    id: 111,
+    name: "Marc Hannah",
+    role: "Computer Graphics Pioneer",
+    organization: "Silicon Graphics",
+    achievement: "Co-founder of Silicon Graphics, a leader in 3D graphics technology that revolutionized computer animation and visualization.",
+    category: "Foundational Computing",
+    year: "1980s–Present",
+    color: "#00B894",
+    source: "<a href='https://www.sgi.com/about/history/' target='_blank'>SGI History</a>"
+  },
+  {
+    id: 112,
+    name: "Ayanna Howard",
+    role: "Robotics Engineer",
+    organization: "Ohio State University",
+    achievement: "Pioneer in human-robot interaction and assistive technologies. First African American woman to earn a PhD in Electrical Engineering from Georgia Tech.",
+    category: "Robotics & Autonomous Systems",
+    year: "1992–Present",
+    color: "#6C5CE7",
+    source: "<a href='https://engineering.osu.edu/people/ayanna-howard' target='_blank'>Ohio State University</a>"
+  },
+  {
+    id: 113,
+    name: "Nashlie Sephus",
+    role: "AI Bias Researcher",
+    organization: "The Bean Path",
+    achievement: "Founder of The Bean Path, researching AI bias and developing tools to mitigate discrimination in hiring algorithms. Advocates for ethical AI in workforce development.",
+    category: "AI Ethics & Governance",
+    year: "2019–Present",
+    color: "#E17055",
+    source: "<a href='https://thebeanpath.com/' target='_blank'>The Bean Path</a>"
+  },
+  {
+    id: 114,
+    name: "Mutale Nkonde",
+    role: "AI Policy Advocate",
+    organization: "AI for the People",
+    achievement: "Founder of AI for the People, advocating for ethical AI policies and community-centered technology development. Former policy advisor to the Obama White House.",
+    category: "AI Ethics & Governance",
+    year: "2018–Present",
+    color: "#00B894",
+    source: "<a href='https://www.ai4people.org/' target='_blank'>AI for the People</a>"
+  },
+  {
+    id: 115,
+    name: "Kyla McMullen",
+    role: "Computer Scientist",
+    organization: "University of Florida",
+    achievement: "Researcher in spatial audio and AI, developing technologies for immersive and accessible audio experiences. Advances in spatial computing for diverse users.",
+    category: "AI Applications",
+    year: "2015–Present",
+    color: "#6C5CE7",
+    source: "<a href='https://www.cise.ufl.edu/~kylamcmullen/' target='_blank'>University of Florida</a>"
+  }
   }
 ];
 
-const categories = ["All", "AI Ethics & Governance", "AI for Social Impact", "Machine Learning", "Natural Language Processing", "Robotics & Autonomous Systems", "Computer Vision", "AI Community & Advocacy"];
+const categories = ["All", "AI Ethics & Governance", "AI for Social Impact", "Machine Learning", "Natural Language Processing", "Robotics & Autonomous Systems", "Computer Vision", "AI Community & Advocacy", "Foundational Computing", "AI Applications"];
