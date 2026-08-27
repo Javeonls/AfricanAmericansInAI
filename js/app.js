@@ -1017,7 +1017,194 @@
 
   // Initialize all new features
   initDataVisualization();
+  initCompanyBreakdownChart();
+  initPayEquityChart();
+  initGeographicDistributionChart();
   initContrastChecker();
+
+  // ===== New Functions for Data Visualizations =====
+  function initCompanyBreakdownChart() {
+    const ctx = document.getElementById('company-breakdown').getContext('2d');
+    if (ctx) {
+      const data = {
+        labels: ['Google', 'Microsoft', 'IBM', 'Amazon', 'Apple', 'Meta', 'Other'],
+        datasets: [
+          {
+            label: 'African American Representation (%)',
+            data: [8, 6, 12, 5, 7, 4, 10],
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.7)',
+              'rgba(54, 162, 235, 0.7)',
+              'rgba(255, 206, 86, 0.7)',
+              'rgba(75, 192, 192, 0.7)',
+              'rgba(153, 102, 255, 0.7)',
+              'rgba(255, 159, 64, 0.7)',
+              'rgba(199, 199, 199, 0.7)'
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)',
+              'rgba(199, 199, 199, 1)'
+            ],
+            borderWidth: 1
+          }
+        ],
+      };
+      const options = {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.dataset.label + ': ' + context.raw + '%';
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Percentage (%)'
+            }
+          }
+        }
+      };
+      new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: options
+      });
+    }
+  }
+
+  function initPayEquityChart() {
+    const ctx = document.getElementById('pay-equity').getContext('2d');
+    if (ctx) {
+      const data = {
+        labels: ['African American Men', 'African American Women', 'White Men', 'White Women'], 
+        datasets: [
+          {
+            label: 'Average Salary ($)',
+            data: [95000, 88000, 110000, 102000],
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.7)',
+              'rgba(54, 162, 235, 0.7)',
+              'rgba(255, 206, 86, 0.7)',
+              'rgba(75, 192, 192, 0.7)'
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)'
+            ],
+            borderWidth: 1
+          }
+        ],
+      };
+      const options = {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.dataset.label + ': $' + context.raw;
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Salary ($)'
+            }
+          }
+        }
+      };
+      new Chart(ctx, {
+        type: 'bar',
+        data: data,
+        options: options
+      });
+    }
+  }
+
+  function initGeographicDistributionChart() {
+    const ctx = document.getElementById('geographic-distribution').getContext('2d');
+    if (ctx) {
+      const data = {
+        labels: ['California', 'New York', 'Texas', 'Illinois', 'Massachusetts', 'Georgia', 'Other'],
+        datasets: [
+          {
+            label: 'African American AI Professionals (%)',
+            data: [22, 18, 12, 10, 8, 7, 23],
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.7)',
+              'rgba(54, 162, 235, 0.7)',
+              'rgba(255, 206, 86, 0.7)',
+              'rgba(75, 192, 192, 0.7)',
+              'rgba(153, 102, 255, 0.7)',
+              'rgba(255, 159, 64, 0.7)',
+              'rgba(199, 199, 199, 0.7)'
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+              'rgba(255, 159, 64, 1)',
+              'rgba(199, 199, 199, 1)'
+            ],
+            borderWidth: 1
+          }
+        ],
+      };
+      const options = {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top',
+          },
+          tooltip: {
+            callbacks: {
+              label: function(context) {
+                return context.dataset.label + ': ' + context.raw + '%';
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Percentage (%)'
+            }
+          }
+        }
+      };
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: data,
+        options: options
+      });
+    }
+  }
 
   // Start the app when DOM is ready
   if (document.readyState === 'loading') {
