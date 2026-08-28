@@ -1,0 +1,106 @@
+/* Data & Insights Section */
+.insights-section {
+    padding: 4rem 20px;
+    background-color: #f8f9fa;
+    color: #1a1a1a;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.insights-header {
+    max-width: 800px;
+    margin: 0 auto 3rem auto;
+    text-align: center;
+}
+
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.chart-container {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.chart-container h3 {
+    margin-top: 0;
+    font-size: 1.25rem;
+    color: #2c3e50;
+    border-bottom: 2px solid #e2e8f0;
+    padding-bottom: 0.5rem;
+}
+
+.meta-text {
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.error-banner {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    padding: 1rem;
+    border-radius: 6px;
+    text-align: center;
+    border: 1px solid #f87171;
+    margin-bottom: 2rem;
+}
+
+/* D3 SVG Styles */
+.d3-wrapper {
+    width: 100%;
+    height: 350px;
+    position: relative;
+}
+
+.axis-text {
+    font-size: 12px;
+    fill: #64748b;
+    font-family: inherit;
+}
+
+.grid-line {
+    stroke: #e2e8f0;
+    stroke-dasharray: 4;
+}
+
+/* Screen Reader Only (Accessibility) */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* Tooltip */
+.chart-tooltip {
+    position: absolute;
+    background: rgba(26, 26, 26, 0.95);
+    color: #fff;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.1s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    z-index: 100;
+    max-width: 250px;
+}
+
+.tooltip-source {
+    display: block;
+    margin-top: 6px;
+    font-size: 0.75rem;
+    color: #94a3b8;
+    border-top: 1px solid #475569;
+    padding-top: 6px;
+}

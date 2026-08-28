@@ -4,78 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>African Americans in AI</title>
-    <style>
-        :root {
-            --bg-color: #f4f4f9;
-            --text-color: #333;
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --card-bg: #fff;
-        }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
-            background-color: var(--bg-color); 
-            color: var(--text-color); 
-            margin: 0; 
-            line-height: 1.6; 
-        }
-        .container { 
-            max-width: 1000px; 
-            margin: 0 auto; 
-            padding: 0 20px; 
-        }
-        header { 
-            background-color: var(--primary-color); 
-            color: #fff; 
-            padding: 40px 0; 
-            text-align: center; 
-        }
-        h1 { margin: 0 0 10px 0; }
-        main { padding: 40px 0; }
-        section { margin-bottom: 50px; }
-        h2 { 
-            border-bottom: 2px solid var(--accent-color); 
-            padding-bottom: 10px; 
-            margin-bottom: 20px; 
-        }
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 20px; 
-        }
-        .card { 
-            background-color: var(--card-bg); 
-            padding: 20px; 
-            border-radius: 8px; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
-        }
-        .card h3 { 
-            margin-top: 0; 
-            color: var(--primary-color); 
-        }
-        .metric { 
-            font-size: 2em; 
-            font-weight: bold; 
-            color: var(--accent-color); 
-            margin: 10px 0; 
-        }
-        .source { 
-            font-size: 0.85em; 
-            color: #7f8c8d; 
-            margin-top: 15px; 
-            display: block; 
-        }
-        .source a { 
-            color: var(--accent-color); 
-            text-decoration: none; 
-        }
-        footer { 
-            text-align: center; 
-            padding: 20px 0; 
-            background-color: #e0e0e0; 
-            font-size: 0.9em; 
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <header>
@@ -88,12 +17,16 @@
     <main class="container">
         <section id="statistics">
             <h2>Representation Data</h2>
-            <div id="stats-grid" class="grid"></div>
+            <div id="stats-grid" class="grid">
+                <!-- Populated by app.js -->
+            </div>
         </section>
 
         <section id="pioneers">
             <h2>Pioneers in Computing & AI</h2>
-            <div id="pioneers-grid" class="grid"></div>
+            <div id="pioneers-grid" class="grid">
+                <!-- Populated by app.js -->
+            </div>
         </section>
     </main>
 
@@ -104,72 +37,6 @@
         </div>
     </footer>
 
-    <script>
-        const siteData = {
-          "statistics": [
-            {
-              "title": "AI PhD Graduates (2019)",
-              "metric": "2.4%",
-              "description": "Percentage of new U.S.-resident AI PhD graduates who were African American.",
-              "source_name": "Stanford HAI",
-              "source_url": "https://hai.stanford.edu/news/ai-index-diversity-report-unmoving-needle"
-            },
-            {
-              "title": "AI Bachelor's Degrees (2011-2021)",
-              "metric": "7.5%",
-              "description": "Black students' share of AI degrees dropped from over 9% to 7.5% between 2011 and 2021, despite overall volume growing.",
-              "source_name": "CSET Georgetown",
-              "source_url": "https://cset.georgetown.edu/publication/a-byte-out-of-the-gap-analyzing-ai-bachelors-masters-and-phd-production-for-black-students/"
-            },
-            {
-              "title": "AI Familiarity & Adoption",
-              "metric": "83%",
-              "description": "Percentage of Black survey respondents familiar with AI, with over half using AI tools daily or weekly.",
-              "source_name": "JFF / Workshift",
-              "source_url": "https://workshift.org/black-learners-and-workers-lead-on-ai-adoption-but-need-additional-training/"
-            }
-          ],
-          "pioneers": [
-            {
-              "name": "Marian Croak",
-              "role": "VP of Site Reliability for Ads & YouTube, Google",
-              "description": "A pioneering engineer who led the core development of Voice over IP (VOIP) technology in the 1990s.",
-              "source_name": "Historian Speaks",
-              "source_url": "https://historianspeaks.org/f/african-americans-and-the-revolutionary-potential-of-ai"
-            },
-            {
-              "name": "Dr. Gladys West",
-              "role": "Mathematician",
-              "description": "Created the highly detailed mathematical geodetic model of the Earth, which served as the foundation for modern GPS.",
-              "source_name": "Historian Speaks",
-              "source_url": "https://historianspeaks.org/f/african-americans-and-the-revolutionary-potential-of-ai"
-            }
-          ]
-        };
-
-        document.addEventListener("DOMContentLoaded", () => {
-            const renderGrid = (elementId, items, templateFn) => {
-                document.getElementById(elementId).innerHTML = items.map(templateFn).join('');
-            };
-
-            renderGrid('stats-grid', siteData.statistics, stat => `
-                <div class="card">
-                    <h3>${stat.title}</h3>
-                    <div class="metric">${stat.metric}</div>
-                    <p>${stat.description}</p>
-                    <small class="source">Source: <a href="${stat.source_url}" target="_blank">${stat.source_name}</a></small>
-                </div>
-            `);
-
-            renderGrid('pioneers-grid', siteData.pioneers, person => `
-                <div class="card">
-                    <h3>${person.name}</h3>
-                    <strong>${person.role}</strong>
-                    <p>${person.description}</p>
-                    <small class="source">Source: <a href="${person.source_url}" target="_blank">${person.source_name}</a></small>
-                </div>
-            `);
-        });
-    </script>
+    <script src="js/app.js"></script>
 </body>
 </html>
