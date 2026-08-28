@@ -1,389 +1,175 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Celebrating African Americans in Artificial Intelligence — their achievements, innovations, and contributions to the field.">
-  <meta name="keywords" content="African Americans, AI, artificial intelligence, pioneers, pioneers in AI, Black AI researchers, algorithmic bias, machine learning">
-  <meta name="author" content="African Americans in AI">
-  <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#d4a843">
-  <meta name="color-scheme" content="dark light">
-
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="African Americans in AI — Celebrating Pioneers & Innovators">
-  <meta property="og:description" content="Celebrating the pioneers, innovators, and leaders shaping the future of artificial intelligence.">
-  <meta property="og:url" content="https://africanamericansinai.org">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://africanamericansinai.org/images/og-social-preview.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:locale" content="en_US">
-  <meta property="og:site_name" content="African Americans in AI">
-
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="African Americans in AI — Celebrating Pioneers & Innovators">
-  <meta name="twitter:description" content="Celebrating the pioneers, innovators, and leaders shaping the future of artificial intelligence.">
-  <meta name="twitter:image" content="https://africanamericansinai.org/images/og-social-preview.png">
-  <meta name="twitter:site" content="@AfricanAI">
-  <meta name="twitter:creator" content="@AfricanAI">
-
-  <title>African Americans in AI — Celebrating Achievements</title>
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
-  <!-- Chart.js for data visualization -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>African Americans in AI</title>
+    <style>
+        :root {
+            --bg-color: #f4f4f9;
+            --text-color: #333;
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --card-bg: #fff;
+        }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--text-color); 
+            margin: 0; 
+            line-height: 1.6; 
+        }
+        .container { 
+            max-width: 1000px; 
+            margin: 0 auto; 
+            padding: 0 20px; 
+        }
+        header { 
+            background-color: var(--primary-color); 
+            color: #fff; 
+            padding: 40px 0; 
+            text-align: center; 
+        }
+        h1 { margin: 0 0 10px 0; }
+        main { padding: 40px 0; }
+        section { margin-bottom: 50px; }
+        h2 { 
+            border-bottom: 2px solid var(--accent-color); 
+            padding-bottom: 10px; 
+            margin-bottom: 20px; 
+        }
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 20px; 
+        }
+        .card { 
+            background-color: var(--card-bg); 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+        }
+        .card h3 { 
+            margin-top: 0; 
+            color: var(--primary-color); 
+        }
+        .metric { 
+            font-size: 2em; 
+            font-weight: bold; 
+            color: var(--accent-color); 
+            margin: 10px 0; 
+        }
+        .source { 
+            font-size: 0.85em; 
+            color: #7f8c8d; 
+            margin-top: 15px; 
+            display: block; 
+        }
+        .source a { 
+            color: var(--accent-color); 
+            text-decoration: none; 
+        }
+        footer { 
+            text-align: center; 
+            padding: 20px 0; 
+            background-color: #e0e0e0; 
+            font-size: 0.9em; 
+        }
+    </style>
 </head>
 <body>
-
-  <!-- ===== Navigation Bar ===== -->
-  <nav class="navbar" role="navigation" aria-label="Main navigation">
-    <div class="container navbar__inner">
-      <a href="#home" class="navbar__logo" aria-label="African Americans in AI — Home">
-        <span class="navbar__logo-icon" aria-hidden="true">🧠</span>
-        <span class="navbar__logo-text">African Americans in AI</span>
-      </a>
-      <button class="navbar__toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-menu">
-        <span class="navbar__toggle-bar"></span>
-        <span class="navbar__toggle-bar"></span>
-        <span class="navbar__toggle-bar"></span>
-      </button>
-      <div class="navbar__menu" id="nav-menu" role="menubar">
-        <a href="#home" class="navbar__link" role="menuitem">Home</a>
-        <a href="#pioneers" class="navbar__link" role="menuitem">Pioneers</a>
-        <a href="#data-insights" class="navbar__link" role="menuitem">Data & Insights</a>
-
-        <a href="#case-study" class="navbar__link" role="menuitem">Case Study</a>
-        <a href="#contribute" class="navbar__link" role="menuitem">Contribute</a>
-        <button class="navbar__theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode" title="Toggle theme">
-          <span class="theme-icon-light" aria-hidden="true">☀️</span>
-          <span class="theme-icon-dark" aria-hidden="true">🌙</span>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <main id="main-content" role="main">
-
-    <!-- ===== Hero / Header ===== -->
-    <header class="header" id="home" role="banner">
-      <div class="header__decoration header__decoration--top" aria-hidden="true"></div>
-      <div class="header__decoration header__decoration--bottom" aria-hidden="true"></div>
-      <div class="container">
-        <h1 class="header__title">African Americans in AI</h1>
-        <p class="header__subtitle">Celebrating the pioneers, innovators, and leaders shaping the future of artificial intelligence</p>
-      </div>
+    <header>
+        <div class="container">
+            <h1>African Americans in AI</h1>
+            <p>Highlighting pioneers, tracking representation data, and building community.</p>
+        </div>
     </header>
 
-    <!-- ===== Spotlight Section ===== -->
-    <section class="spotlight" aria-labelledby="spotlight-heading">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-header__title" id="spotlight-heading">✨ Today's Spotlight</h2>
-          <p class="section-header__subtitle">A randomly selected achievement to inspire you</p>
-        </div>
+    <main class="container">
+        <section id="statistics">
+            <h2>Representation Data</h2>
+            <div id="stats-grid" class="grid"></div>
+        </section>
 
-        <article class="spotlight__card" id="spotlight-card" aria-live="polite" aria-atomic="true">
-          <div class="spotlight__shimmer" aria-hidden="true"></div>
-          <div id="spotlight-content">
-            <!-- Dynamically filled by JS -->
-          </div>
-        </article>
+        <section id="pioneers">
+            <h2>Pioneers in Computing & AI</h2>
+            <div id="pioneers-grid" class="grid"></div>
+        </section>
+    </main>
 
-        <div class="spotlight__controls">
-          <button class="btn btn--primary" id="btn-discover" aria-label="Discover a random achievement">
-            <span aria-hidden="true">🎲</span> Discover Another
-          </button>
-          <a href="#pioneers" class="btn btn--secondary" id="btn-view-all" aria-label="View all pioneers">
-            <span aria-hidden="true">📋</span> View All Pioneers
-          </a>
+    <footer>
+        <div class="container">
+            <p>Built by Javeon Smith | Hosted on GitHub Pages</p>
+            <p><a href="https://github.com/javeonls/AfricanAmericansInAI" target="_blank">View Repository</a></p>
         </div>
-      </div>
-    </section>
+    </footer>
 
-    <!-- ===== Data & Insights Section ===== -->
-    <section class="data-insights" id="data-insights" aria-labelledby="data-insights-heading">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-header__title" id="data-insights-heading">📊 African Americans in AI: The Data</h2>
-          <p class="section-header__subtitle">Explore the stories behind the numbers—where African Americans stand in AI today.</p>
-        </div>
-        <div class="data-visualization">
-          <div class="chart-container">
-            <!-- Interactive Chart: Representation Over Time -->
-            <div class="chart-card">
-              <h3>📈 Representation in AI Roles (2015–2023)</h3>
-              <div id="diversity-chart" class="chart-placeholder"></div>
-              <p class="chart-note"></p>
-            </div>
-          </div>
-          <div class="insights-grid">
-            <div class="insight-card">
-              <h3>🏢 Company Breakdown</h3>
-              <div id="company-breakdown" class="chart-placeholder"></div>
-              <p class="insight-note"></p>
-            </div>
-            <div class="insight-card">
-              <h3>💰 Pay Equity in AI</h3>
-              <div id="pay-equity" class="chart-placeholder"></div>
-              <p class="insight-note"></p>
-            </div>
-            <div class="insight-card">
-              <h3>🌍 Geographic Distribution</h3>
-              <div id="geographic-distribution" class="chart-placeholder"></div>
-              <p class="insight-note"></p>
-            </div>
-          </div>
-        </div>
-        <div class="data-story">
-          <h3>💡</h3> The Story Behind the Data</h3>
-          <p>The</p>se visualizations tell a powerful story:</p>
-          <ul>
-            <li</ul>><strong>Progress is slow</strong>.</strong> Despite advancements in AI, representation for African Americans has grown at a glacial pace.</li>
-            <li><strong>Leadership gaps</strong> are stark.</strong> While entry-level roles show improvement, executive positions remain overwhelmingly homogeneous.</li>
-            <li><strong>Pay equity is a myth.</strong> Even</strong> in diverse teams, disparities persist—highlighting systemic issues in tech compensation.</li>
-            <li><strong>Opportunities exist.</strong></strong> Some companies are leading the charge, proving that change is possible.</li>
-          </ul>
-          <p>Use these insights to advocate for change, whether in your workplace, community, or industry.</p>
-        </div>
-      </div>
-    </section></p>
+    <script>
+        const siteData = {
+          "statistics": [
+            {
+              "title": "AI PhD Graduates (2019)",
+              "metric": "2.4%",
+              "description": "Percentage of new U.S.-resident AI PhD graduates who were African American.",
+              "source_name": "Stanford HAI",
+              "source_url": "https://hai.stanford.edu/news/ai-index-diversity-report-unmoving-needle"
+            },
+            {
+              "title": "AI Bachelor's Degrees (2011-2021)",
+              "metric": "7.5%",
+              "description": "Black students' share of AI degrees dropped from over 9% to 7.5% between 2011 and 2021, despite overall volume growing.",
+              "source_name": "CSET Georgetown",
+              "source_url": "https://cset.georgetown.edu/publication/a-byte-out-of-the-gap-analyzing-ai-bachelors-masters-and-phd-production-for-black-students/"
+            },
+            {
+              "title": "AI Familiarity & Adoption",
+              "metric": "83%",
+              "description": "Percentage of Black survey respondents familiar with AI, with over half using AI tools daily or weekly.",
+              "source_name": "JFF / Workshift",
+              "source_url": "https://workshift.org/black-learners-and-workers-lead-on-ai-adoption-but-need-additional-training/"
+            }
+          ],
+          "pioneers": [
+            {
+              "name": "Marian Croak",
+              "role": "VP of Site Reliability for Ads & YouTube, Google",
+              "description": "A pioneering engineer who led the core development of Voice over IP (VOIP) technology in the 1990s.",
+              "source_name": "Historian Speaks",
+              "source_url": "https://historianspeaks.org/f/african-americans-and-the-revolutionary-potential-of-ai"
+            },
+            {
+              "name": "Dr. Gladys West",
+              "role": "Mathematician",
+              "description": "Created the highly detailed mathematical geodetic model of the Earth, which served as the foundation for modern GPS.",
+              "source_name": "Historian Speaks",
+              "source_url": "https://historianspeaks.org/f/african-americans-and-the-revolutionary-potential-of-ai"
+            }
+          ]
+        };
 
-    <!-- ===== Accessibility Tool Section ===== -->
+        document.addEventListener("DOMContentLoaded", () => {
+            const renderGrid = (elementId, items, templateFn) => {
+                document.getElementById(elementId).innerHTML = items.map(templateFn).join('');
+            };
 
+            renderGrid('stats-grid', siteData.statistics, stat => `
+                <div class="card">
+                    <h3>${stat.title}</h3>
+                    <div class="metric">${stat.metric}</div>
+                    <p>${stat.description}</p>
+                    <small class="source">Source: <a href="${stat.source_url}" target="_blank">${stat.source_name}</a></small>
+                </div>
+            `);
 
-    <!-- ===== Search Bar ===== -->
-    <section class="search" aria-labelledby="search-heading">
-      <div class="container">
-        <div class="search__inner">
-          <h3 class="search__title" id="search-heading">🔎 Search Pioneers</h3>
-          <div class="search__input-wrapper">
-            <input type="text" class="search__input" id="search-input" placeholder="Search by name, field, organization, or achievement..." aria-label="Search pioneers">
-            <span class="search__icon" aria-hidden="true">🔍</span>
-            <button class="search__clear" id="search-clear" aria-label="Clear search" type="button">&times;</button>
-          </div>
-          <div class="search__results-count" id="search-results-count" aria-live="polite"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Filter Section ===== -->
-    <section class="filter" aria-label="Filter pioneers by category">
-      <div class="container">
-        <div class="filter__inner">
-          <h3 class="filter__title">🔍 Filter by <span>Field</span></h3>
-          <div class="filter__buttons" id="filter-buttons" role="group" aria-label="Category filters">
-            <!-- Dynamically filled by JS -->
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== View Toggle ===== -->
-    <section class="view-toggle" aria-label="View options">
-      <div class="container">
-        <div class="view-toggle__inner">
-          <span class="view-toggle__label">View:</span>
-          <div class="view-toggle__buttons" role="group" aria-label="View mode">
-            <button class="view-toggle__btn view-toggle__btn--active" id="btn-grid-view" aria-pressed="true" data-view="grid">
-              <span aria-hidden="true">▦</span> Grid
-            </button>
-            <button class="view-toggle__btn" id="btn-timeline-view" aria-pressed="false" data-view="timeline">
-              <span aria-hidden="true">⏳</span> Timeline
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Grid / Timeline Section ===== -->
-    <section class="grid" id="pioneers" aria-labelledby="grid-heading">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-header__title" id="grid-heading">All Pioneers</h2>
-          <p class="section-header__subtitle">Explore the contributions of African American leaders in AI</p>
-        </div>
-
-        <!-- Skeleton Loaders -->
-        <div class="skeleton-grid" id="skeleton-grid" aria-hidden="true">
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
-          <div class="skeleton-card"></div>
-        </div>
-
-        <div class="grid__inner timeline__inner" id="pioneers-grid" role="list">
-          <!-- Dynamically filled by JS -->
-        </div>
-        <div class="empty-state" id="empty-state" style="display: none;">
-          <div class="empty-state__icon" aria-hidden="true">🔍</div>
-          <p class="empty-state__text">No pioneers found matching your search or filter. Try adjusting your criteria.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Resources & Organizations ===== -->
-    <section class="resources" id="resources" aria-labelledby="resources-heading">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-header__title" id="resources-heading">Resources & Community</h2>
-          <p class="section-header__subtitle">Organizations, fellowships, mentorship, and reading to support your AI journey</p>
-        </div>
-
-        <div class="resources__grid" id="resources-grid">
-          <!-- Dynamically filled by JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Case Study Section ===== -->
-    <section class="case-study" id="case-study" aria-labelledby="case-study-heading">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-header__title" id="case-study-heading">📝 Case Study: Building Inclusive AI Tools</h2>
-          <p class="section-header__subtitle">How we analyzed diversity in AI and improved accessibility with contrast checks.</p>
-        </div>
-        <div class="case-study-content">
-          <div class="case-study__section">
-            <h2>📊 Data</h2> Analysis: Diversity in AI</h2>
-            <p>Explore the <strong></strong>striking visualizations</strong> of African American representation in AI roles, job trends, and leadership gaps. This section transforms raw data into compelling stories through:</p>
-            <div class="case-study__visuals">
-              <ul>
-                <li><</ul>strong>🌍 Global Representation:</strong> Interactive maps showing the geographic distribution of African American AI professionals.</li>
-                <li><strong>📈</strong> Leadership Gap:</strong> A dynamic bar chart comparing representation in entry-level vs. executive roles.</li>
-                <li><strong>💰 Pay Equity:</strong> Side-by-side visualizations of salary disparities across gender and ethnicity.</li>
-                <li><strong>📅 Trends</strong> Over Time:</strong> Animated line charts illustrating the growth (or stagnation) of African American representation in AI from 2015 to 2023.</li>
-                <li><strong>🏢 Company Breakdown:</strong</strong>> A treemap showing which tech companies have the highest (and lowest) representation.</li>
-              </ul>
-            </div>
-            <p>These visuals don’t just show numbers</p>—they <strong>tell a story</strong> of progress</strong>, disparities, and opportunities in AI. Dive into the data to uncover:</p>
-            <ul>
-              <</ul>li>Which companies are leading in diversity hiring?</li>
-              <li>Where are the biggest gaps in leadership?</li>
-              <</li>li>How have trends changed over the past decade?</li>
-            </ul>
-          </div>
-          <div class="case-study__section">
-
-          </div>
-          <div class="case-study__section">
-            <h2>💡 Why This Matters</h2>
-            <p>This project isn’t just about data or tools—it’s about <strong>amplifying</h2></p></strong> voices</strong> and <strong>creating inclusive spaces</strong></strong> in AI. Here’s how we did it:</p>
-            <div class="case-study__visuals">
-              <ul>
-                <li><</ul>strong>📉 Bridging the Gap:</strong> Our visualizations highlight the disparities in AI, making it impossible to ignore.</li>
-                <li><strong></strong>🎯 Empowering Designers:</strong> The contrast checker gives developers and designers the power to build inclusive products effortlessly.</li>
-                <li><strong></strong>🌟 Inspiring Action:</strong> By showing the data and tools, we hope to inspire companies to take meaningful steps toward diversity and accessibility.</li>
-                <li><strong>🔗 Connecting</strong> the Dots:</strong> See how diversity in AI roles correlates with innovation, equity, and user trust.</li>
-              </ul>
-            </div>
-            <p>Explore the data</p>, test the tools, and join the conversation about building a more inclusive future for AI.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== Footer ===== -->
-  <!-- ===== Nomination Modal ===== -->
-  <div class="modal" id="nominate-modal" role="dialog" aria-modal="true" aria-labelledby="nominate-modal-title" aria-hidden="true">
-    <div class="modal__overlay" id="nominate-overlay"></div>
-    <div class="modal__content" role="document">
-      <button class="modal__close" id="nominate-close" aria-label="Close nomination form">&times;</button>
-      <h2 class="modal__title" id="nominate-modal-title">Nominate a Pioneer</h2>
-      <p class="modal__subtitle">Fill in the details below to nominate an African American leader in AI.</p>
-      <form id="nominate-form" novalidate>
-        <div class="form__group">
-          <label for="nominate-name">Pioneer's Full Name <span class="required">*</span></label>
-          <input type="text" id="nominate-name" name="name" required placeholder="e.g., Dr. Jane Smith" autocomplete="name">
-          <span class="form__error" id="error-name" role="alert"></span>
-        </div>
-        <div class="form__group">
-          <label for="nominate-field">Field / Expertise <span class="required">*</span></label>
-          <input type="text" id="nominate-field" name="field" required placeholder="e.g., Machine Learning, AI Ethics">
-          <span class="form__error" id="error-field" role="alert"></span>
-        </div>
-        <div class="form__group">
-          <label for="nominate-achievement">Key Achievements <span class="required">*</span></label>
-          <textarea id="nominate-achievement" name="achievement" rows="4" required placeholder="Describe their key contributions and achievements..."></textarea>
-          <span class="form__error" id="error-achievement" role="alert"></span>
-        </div>
-        <div class="form__group">
-          <label for="nominate-links">Reference Links</label>
-          <input type="url" id="nominate-links" name="links" placeholder="https://example.com (optional)">
-          <span class="form__error" id="error-links" role="alert"></span>
-        </div>
-        <div class="form__group">
-          <label for="nominate-org">Organization / Affiliation</label>
-          <input type="text" id="nominate-org" name="org" placeholder="e.g., Stanford University">
-        </div>
-        <div class="form__group">
-          <label for="nominate-contact">Your Contact Info <span class="required">*</span></label>
-          <input type="email" id="nominate-contact" name="contact" required placeholder="your.email@example.com">
-          <span class="form__error" id="error-contact" role="alert"></span>
-        </div>
-        <div class="form__group">
-          <label for="nominate-year">Year of Impact (optional)</label>
-          <input type="text" id="nominate-year" name="year" placeholder="e.g., 2018–Present">
-        </div>
-        <div class="form__actions">
-          <button type="submit" class="btn btn--primary">Submit Nomination</button>
-          <button type="button" class="btn btn--secondary" id="nominate-cancel">Cancel</button>
-        </div>
-        <div class="form__success" id="nominate-success" style="display: none;" role="status">
-          ✅ Thank you! Your nomination has been submitted for review.
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- ===== Profile Detail Modal ===== -->
-  <div class="modal" id="detail-modal" role="dialog" aria-modal="true" aria-labelledby="detail-modal-title" aria-hidden="true">
-    <div class="modal__overlay" id="detail-overlay"></div>
-    <div class="modal__content modal__content--detail" role="document">
-      <button class="modal__close" id="detail-close" aria-label="Close detail view">&times;</button>
-      <div id="detail-body">
-        <!-- Dynamically filled by JS -->
-      </div>
-    </div>
-  </div>
-
-  <!-- ===== Footer ===== -->
-  <footer class="footer" role="contentinfo">
-    <div class="container">
-      <div class="footer__inner">
-        <div class="footer__brand">
-          <span class="footer__logo-icon" aria-hidden="true">🧠</span>
-          <span class="footer__logo-text">African Americans in AI</span>
-        </div>
-        <nav class="footer__nav" aria-label="Footer navigation">
-          <a href="#home" class="footer__link">Home</a>
-          <a href="#pioneers" class="footer__link">Pioneers</a>
-          <a href="#data-insights" class="footer__link">Data & Insights</a>
-          <a href="#accessibility-tool" class="footer__link">Accessibility Tool</a>
-          <a href="#case-study" class="footer__link">Case Study</a>
-          <a href="#contribute" class="footer__link">Contribute</a>
-        </nav>
-        <div class="footer__social">
-          <a href="https://github.com" class="footer__social-link" aria-label="Visit our GitHub repository" target="_blank" rel="noopener noreferrer">
-            <span aria-hidden="true">🐙</span> GitHub
-          </a>
-          <a href="https://linkedin.com/in/yourprofile" class="footer__social-link" aria-label="Connect on LinkedIn" target="_blank" rel="noopener noreferrer">
-            <span aria-hidden="true">💼</span> LinkedIn
-          </a>
-        </div>
-        <p class="footer__copyright">© 2026 African Americans in AI. Built with ❤️ to celebrate and amplify contributions.</p>
-        <a href="#home" class="footer__back-to-top" id="back-to-top" aria-label="Back to top">↑ Back to Top</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ===== Scripts ===== -->
-  <script src="js/data.js"></script>
-  <script src="js/app.js"></script>
+            renderGrid('pioneers-grid', siteData.pioneers, person => `
+                <div class="card">
+                    <h3>${person.name}</h3>
+                    <strong>${person.role}</strong>
+                    <p>${person.description}</p>
+                    <small class="source">Source: <a href="${person.source_url}" target="_blank">${person.source_name}</a></small>
+                </div>
+            `);
+        });
+    </script>
 </body>
 </html>
