@@ -36,6 +36,11 @@
   --navbar-height: 64px;
   --skeleton-base: #2a2a2a;
   --skeleton-shine: #3a3a3a;
+  
+  /* Visual Identity */
+  --logo-color: #d4a843;
+  --logo-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cdefs%3E%3Cpattern id='pattern' patternUnits='userSpaceOnUse' width='100' height='100'%3E%3Cpath d='M0,0 L100,100 M100,0 L0,100' stroke='%23d4a843' stroke-width='1' opacity='0.3'/%3E%3Cpath d='M0,0 L100,100 M100,0 L0,100' stroke='%23f0d060' stroke-width='1' opacity='0.2'/%3E%3Cpath d='M0,0 L100,100 M100,0 L0,100' stroke='%23b8912e' stroke-width='1' opacity='0.1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100' height='100' fill='url(%23pattern)'/%3E%3C/svg%3E");
+  --hero-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cdefs%3E%3Cpattern id='hero-pattern' patternUnits='userSpaceOnUse' width='20' height='20' patternTransform='rotate(45)'%3E%3Crect width='20' height='20' fill='%23d4a843' opacity='0.1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100' height='100' fill='url(%23hero-pattern)'/%3E%3C/svg%3E");
 }
 
 /* ===== Light Theme ===== */
@@ -48,6 +53,9 @@
   --text-primary: #1a1a1a;
   --text-secondary: #5a5248;
   --text-muted: #7a7e6e;
+  --logo-color: #d4a843;
+  --logo-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cdefs%3E%3Cpattern id='pattern' patternUnits='userSpaceOnUse' width='100' height='100'%3E%3Cpath d='M0,0 L100,100 M100,0 L0,100' stroke='%23d4a843' stroke-width='1' opacity='0.3'/%3E%3Cpath d='M0,0 L100,100 M100,0 L0,100' stroke='%23f0d060' stroke-width='1' opacity='0.2'/%3E%3Cpath d='M0,0 L100,100 M100,0 L0,100' stroke='%23b8912e' stroke-width='1' opacity='0.1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100' height='100' fill='url(%23pattern)'/%3E%3C/svg%3E");
+  --hero-pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cdefs%3E%3Cpattern id='hero-pattern' patternUnits='userSpaceOnUse' width='20' height='20' patternTransform='rotate(45)'%3E%3Crect width='20' height='20' fill='%23d4a843' opacity='0.1'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100' height='100' fill='url(%23hero-pattern)'/%3E%3C/svg%3E");
   --accent-gold: #7a5e3a;
   --accent-gold-light: #d4a843;
   --accent-gold-dark: #8b6f47;
@@ -106,6 +114,49 @@ h1, h2, h3, h4 {
   line-height: 1.2;
 }
 
+/* ===== Hero Section ===== */
+.hero-section {
+  background: var(--gradient-hero);
+  color: var(--text-primary);
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background-image: var(--hero-pattern);
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--gradient-hero);
+  opacity: 0.8;
+  z-index: -1;
+}
+
+.hero-section h1 {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  color: var(--logo-color);
+  margin-bottom: 1rem;
+  position: relative;
+  letter-spacing: -0.02em;
+}
+
+.hero-section h1::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--accent-gold), var(--accent-terracotta), var(--accent-green));
+  border-radius: 2px;
+}
+
 a {
   color: var(--accent-gold);
   text-decoration: none;
@@ -123,6 +174,7 @@ a:hover {
   padding: 0 24px;
   position: relative;
   z-index: 1;
+  background-image: var(--hero-pattern);
 }
 
 /* ===== Buttons ===== */
@@ -364,12 +416,26 @@ a:hover {
 .section-header {
   text-align: center;
   margin-bottom: 56px;
+  position: relative;
 }
 
 .section-header__title {
   font-size: clamp(1.5rem, 3vw, 2.25rem);
   color: var(--text-primary);
   margin-bottom: 8px;
+  position: relative;
+}
+
+.section-header__title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent-gold), var(--accent-terracotta), var(--accent-green));
+  border-radius: 1px;
 }
 
 .section-header__subtitle {
@@ -383,6 +449,7 @@ a:hover {
 .spotlight {
   padding: 80px 0;
   position: relative;
+  background-image: var(--hero-pattern);
 }
 
 .spotlight__card {
@@ -390,6 +457,11 @@ a:hover {
   margin: 0 auto;
   background: var(--gradient-card);
   border-radius: var(--radius-xl);
+  border: 1px solid rgba(212, 168, 67, 0.06);
+  box-shadow: 0 0 20px rgba(212, 168, 67, 0.04);
+  position: relative;
+  overflow: hidden;
+}
   padding: 56px;
   position: relative;
   overflow: hidden;
@@ -810,11 +882,12 @@ a:hover {
   border-radius: var(--radius-lg);
   padding: 24px;
   box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(212, 168, 67, 0.06);
   transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-smooth);
   animation: fadeInUp 0.6s ease forwards;
   opacity: 0;
   cursor: pointer;
+  background-image: var(--logo-pattern);
 }
 
 .card:hover {

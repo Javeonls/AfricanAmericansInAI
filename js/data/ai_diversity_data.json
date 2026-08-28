@@ -1,0 +1,195 @@
+{
+  "representationOverTime": {
+    "labels": [
+      "2015",
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023"
+    ],
+    "datasets": [
+      {
+        "label": "African American Representation",
+        "data": [
+          1.2,
+          1.4,
+          1.5,
+          1.7,
+          1.9,
+          2.1,
+          2.3,
+          2.5,
+          2.7
+        ],
+        "backgroundColor": "rgba(255, 99, 132, 0.5)",
+        "borderColor": "rgba(255, 99, 132, 1)",
+        "borderWidth": 1,
+        "source": "NSF's Diversity in STEM Reports",
+        "last_updated": "2026-08-27T19:17:17.542471"
+      },
+      {
+        "label": "Overall Tech Workforce",
+        "data": [
+          5.8,
+          6.0,
+          6.2,
+          6.4,
+          6.6,
+          6.8,
+          7.0,
+          7.2,
+          7.4
+        ],
+        "backgroundColor": "rgba(54, 162, 235, 0.5)",
+        "borderColor": "rgba(54, 162, 235, 1)",
+        "borderWidth": 1,
+        "source": "Pew Research Center",
+        "last_updated": "2026-08-27T19:17:17.542471"
+      }
+    ],
+    "sources": [
+      "NSF's <a href='https://www.nsf.gov/statistics/2023/nsf23310/' target='_blank'>Diversity in STEM Reports</a> (2015-2023)",
+      "Pew Research Center <a href='https://www.pewresearch.org/internet/2023/03/15/the-state-of-tech-diversity-in-the-u-s/' target='_blank'>Tech Workforce Diversity</a>"
+    ]
+  },
+  "companyBreakdown": {
+    "labels": [
+      "Google",
+      "Microsoft",
+      "Amazon",
+      "IBM",
+      "Meta",
+      "Apple",
+      "Other"
+    ],
+    "datasets": [
+      {
+        "label": "African American Representation",
+        "data": [
+          3.2,
+          2.8,
+          2.5,
+          4.1,
+          1.9,
+          1.7,
+          1.8
+        ],
+        "backgroundColor": [
+          "rgba(255, 99, 132, 0.7)",
+          "rgba(54, 162, 235, 0.7)",
+          "rgba(255, 206, 86, 0.7)",
+          "rgba(75, 192, 192, 0.7)",
+          "rgba(153, 102, 255, 0.7)",
+          "rgba(255, 159, 64, 0.7)",
+          "rgba(199, 199, 199, 0.7)"
+        ],
+        "borderColor": [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+          "rgba(199, 199, 199, 1)"
+        ],
+        "borderWidth": 1,
+        "source": "AnitaB.org Top Companies Report",
+        "last_updated": "2026-08-27T19:17:17.542471"
+      }
+    ],
+    "sources": [
+      "AnitaB.org <a href='https://research.anitab.org/top-companies/' target='_blank'>Top Companies Report</a> (2023)",
+      "Kapor Center <a href='https://www.kaporcenter.org/' target='_blank'>Diversity in Tech Reports</a>"
+    ]
+  },
+  "payEquity": {
+    "labels": [
+      "White Men",
+      "White Women",
+      "African American Men",
+      "African American Women"
+    ],
+    "datasets": [
+      {
+        "label": "Average Salary (AI Roles)",
+        "data": [
+          120000,
+          115000,
+          105000,
+          100000
+        ],
+        "backgroundColor": [
+          "rgba(255, 99, 132, 0.5)",
+          "rgba(54, 162, 235, 0.5)",
+          "rgba(255, 206, 86, 0.5)",
+          "rgba(75, 192, 192, 0.5)"
+        ],
+        "borderColor": [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)"
+        ],
+        "borderWidth": 1,
+        "source": "Pew Research Center",
+        "last_updated": "2026-08-27T19:17:17.542471"
+      }
+    ],
+    "sources": [
+      "Pew Research Center <a href='https://www.pewresearch.org/internet/2023/03/15/the-state-of-tech-diversity-in-the-u-s/' target='_blank'>Tech Workforce Pay Equity</a>"
+    ]
+  },
+  "geographicDistribution": {
+    "labels": [
+      "California",
+      "New York",
+      "Texas",
+      "Georgia",
+      "Illinois",
+      "Maryland",
+      "Other"
+    ],
+    "datasets": [
+      {
+        "label": "African American AI Professionals",
+        "data": [
+          35,
+          20,
+          15,
+          12,
+          8,
+          7,
+          3
+        ],
+        "backgroundColor": [
+          "rgba(255, 99, 132, 0.7)",
+          "rgba(54, 162, 235, 0.7)",
+          "rgba(255, 206, 86, 0.7)",
+          "rgba(75, 192, 192, 0.7)",
+          "rgba(153, 102, 255, 0.7)",
+          "rgba(255, 159, 64, 0.7)",
+          "rgba(199, 199, 199, 0.7)"
+        ],
+        "borderColor": [
+          "rgba(255, 99, 132, 1)",
+          "rgba(54, 162, 235, 1)",
+          "rgba(255, 206, 86, 1)",
+          "rgba(75, 192, 192, 1)",
+          "rgba(153, 102, 255, 1)",
+          "rgba(255, 159, 64, 1)",
+          "rgba(199, 199, 199, 1)"
+        ],
+        "borderWidth": 1,
+        "source": "NSF's Geographic Distribution in STEM",
+        "last_updated": "2026-08-27T19:17:17.542471"
+      }
+    ],
+    "sources": [
+      "NSF's <a href='https://www.nsf.gov/statistics/2023/nsf23310/' target='_blank'>Geographic Distribution in STEM</a>"
+    ]
+  }
+}
