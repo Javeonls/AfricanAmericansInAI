@@ -1152,6 +1152,14 @@ a:hover {
   font-style: italic;
 }
 
+.chart-note--updated, .insight-note--updated {
+  font-size: 0.85em;
+  color: var(--text-muted);
+  margin-top: 5px;
+  font-style: normal;
+  font-weight: 500;
+}
+
 .insights-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));

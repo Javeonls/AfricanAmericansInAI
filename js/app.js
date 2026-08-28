@@ -920,11 +920,23 @@
           options: options
         });
       
-        // Add source citation
+        // Add source citation and last updated date
         const chartNote = document.querySelector('#diversity-chart + .chart-note');
         if (chartNote) {
-          chartNote.innerHTML = '<p class="chart-note">Sources: ' +
-            representationData.sources.join(', ') + '</p>';
+          const datasets = representationData.datasets;
+          const lastUpdated = datasets.length > 0 ? datasets[0].last_updated : null;
+        
+          let html = '<p class="chart-note">Sources: ' + representationData.sources.join(', ') + '</p>';
+        
+          if (lastUpdated) {
+            const date = new Date(lastUpdated);
+            const formattedDate = date.toLocaleDateString('en-US', {
+              year: 'numeric', month: 'long', day: 'numeric'
+            });
+            html += '<p class="chart-note--updated">Last updated: ' + formattedDate + '</p>';
+          }
+        
+          chartNote.innerHTML = html;
         }
       })
       .catch(error => console.error('Error loading data:', error));
@@ -986,11 +998,23 @@
           options: options
         });
       
-        // Add source citation
+        // Add source citation and last updated date
         const insightNote = document.querySelector('#company-breakdown + .insight-note');
         if (insightNote) {
-          insightNote.innerHTML = '<p class="insight-note">Sources: ' +
-            companyData.sources.join(', ') + '</p>';
+          const datasets = companyData.datasets;
+          const lastUpdated = datasets.length > 0 ? datasets[0].last_updated : null;
+        
+          let html = '<p class="insight-note">Sources: ' + companyData.sources.join(', ') + '</p>';
+        
+          if (lastUpdated) {
+            const date = new Date(lastUpdated);
+            const formattedDate = date.toLocaleDateString('en-US', {
+              year: 'numeric', month: 'long', day: 'numeric'
+            });
+            html += '<p class="insight-note--updated">Last updated: ' + formattedDate + '</p>';
+          }
+        
+          insightNote.innerHTML = html;
         }
       })
       .catch(error => console.error('Error loading data:', error));
@@ -1041,11 +1065,23 @@
           options: options
         });
       
-        // Add source citation
+        // Add source citation and last updated date
         const insightNote = document.querySelector('#pay-equity + .insight-note');
         if (insightNote) {
-          insightNote.innerHTML = '<p class="insight-note">Sources: ' +
-            payEquityData.sources.join(', ') + '</p>';
+          const datasets = payEquityData.datasets;
+          const lastUpdated = datasets.length > 0 ? datasets[0].last_updated : null;
+        
+          let html = '<p class="insight-note">Sources: ' + payEquityData.sources.join(', ') + '</p>';
+        
+          if (lastUpdated) {
+            const date = new Date(lastUpdated);
+            const formattedDate = date.toLocaleDateString('en-US', {
+              year: 'numeric', month: 'long', day: 'numeric'
+            });
+            html += '<p class="insight-note--updated">Last updated: ' + formattedDate + '</p>';
+          }
+        
+          insightNote.innerHTML = html;
         }
       })
       .catch(error => console.error('Error loading data:', error));
@@ -1096,11 +1132,23 @@
           options: options
         });
       
-        // Add source citation
+        // Add source citation and last updated date
         const insightNote = document.querySelector('#geographic-distribution + .insight-note');
         if (insightNote) {
-          insightNote.innerHTML = '<p class="insight-note">Sources: ' +
-            geoData.sources.join(', ') + '</p>';
+          const datasets = geoData.datasets;
+          const lastUpdated = datasets.length > 0 ? datasets[0].last_updated : null;
+        
+          let html = '<p class="insight-note">Sources: ' + geoData.sources.join(', ') + '</p>';
+        
+          if (lastUpdated) {
+            const date = new Date(lastUpdated);
+            const formattedDate = date.toLocaleDateString('en-US', {
+              year: 'numeric', month: 'long', day: 'numeric'
+            });
+            html += '<p class="insight-note--updated">Last updated: ' + formattedDate + '</p>';
+          }
+        
+          insightNote.innerHTML = html;
         }
       })
       .catch(error => console.error('Error loading data:', error));
